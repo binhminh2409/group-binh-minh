@@ -1,0 +1,56 @@
+﻿@model EcommerceWeb.Models.SubCategory
+@{
+    ViewBag.Title = "Add New SubCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+        <h2 class="text-info">Add New SubCategory</h2>
+        <hr />
+        <div class="col-md-12">
+            <form asp-controller="SubCategory" asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+                <div class="row mb-2">
+                    <div id="msg">
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Name" class="form-label fs-4"></label>
+                        <input asp-for="Name" class="form-control fs-4" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="CategoryID" class="form-label fs-4"></label>
+                        <select asp-for="CategoryID" asp-items="@(new SelectList(ViewBag.CategoryList, "Value", "Text"))" class="form-control fs-4">
+                            <option value="">***Select Category***</option>
+                        </select>
+                        <span asp-validation-for="CategoryID" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6" style="padding-top:50px;">
+                        <button type="submit" class="btn btn-success btn-lg col-12"><i class="fa-regular fa-floppy-disk fs-4"></i> Save</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-md-12 d-flex justify-content-lg-start mt-3">
+                <a href="@Url.Action("Index", "Dashboard")" class="btn btn-danger btn-sm fs-4"><i class="fa-regular fa-hand-back-point-left"></i> Back to the list</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/JS/jquery-3.6.0.js"></script>
+    <script src="~/Content/JS/jquery.validate.js"></script>
+    <script src="~/Content/JS/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/JS/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function clearAll() {
+            $("#form0").trigger("reset");
+        }
+    </script>
+}
